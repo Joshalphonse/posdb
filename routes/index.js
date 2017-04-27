@@ -39,14 +39,6 @@ router.get('/goproduct', function(req, res, next) {
     res.render('login', { user: username });
   }
 });
-router.get('/gochef', function(req, res, next) {
-  var username = req.session.username;
-  if(username){
-    res.render('partials/chef');
-  }else{
-    res.render('login', { user: username });
-  }
-});
 
 router.get('/gousers', function(req, res, next) {
   var username = req.session.username;

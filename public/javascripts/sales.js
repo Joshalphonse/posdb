@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   var dateToday = new Date();
   var currDate = dateToday.getDate();

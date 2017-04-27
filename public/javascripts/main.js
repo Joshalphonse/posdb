@@ -12,17 +12,18 @@ $(function(){
             });
         }
   }());
-  
+  // Array Remove - By John Resig (MIT Licensed)
   Array.prototype.remove = function(from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
   };
-  var tblorder = $("#tblorder").children('tbody');
-  var table = tblorder.length ? tblorder : $('#tblorder');
+  var tblCart = $("#tblCart").children('tbody');
+  var table = tblCart.length ? tblCart : $('#tblCart');
   //appender template
   var numCategory = 1;
   var item = '<tr id="row_{{id}}">'+
+             '<td>{{sku}}</td>'+
              '<td>{{name}}</td>'+
              '<td class="col-xs-3"><input type="number"'+ 
              'class="form-control" min="0" id="prod_{{id}}"/></td>'+
@@ -112,12 +113,12 @@ $(function(){
     }
   }
 
-  var order = [];
+  var cart = [];
   var checkQuantity = function(c) {
     var count = 0;
-    for(var i = 0;i<order.length;++i){
-      if(order[i]['id'] == c['id']){
-        count = order[i]['quantity'];
+    for(var i = 0;i<cart.length;++i){
+      if(cart[i]['id'] == c['id']){
+        count = cart[i]['quantity'];
         break;
       }
     }
@@ -129,10 +130,10 @@ $(function(){
 
   var updateQuantity = function(id,val){
     var q = 1;
-    for(var i = 0;i<order.length;++i){
-      if(order[i]['id'] == id){
-        order[i]['quantity'] += 1;
-        q = order[i]['quantity'];
+    for(var i = 0;i<cart.length;++i){
+      if(cart[i]['id'] == id){
+        cart[i]['quantity'] += 1;
+        q = cart[i]['quantity'];
         ////console.log("q " + q)
         break;
       }
@@ -141,20 +142,21 @@ $(function(){
   }
 
   var setQuantity = function(id,val){
-    for(var i = 0;i<order.length;++i){
-      if(order[i]['id'] == id){
-        order[i]['quantity'] = val;
+    for(var i = 0;i<cart.length;++i){
+      if(cart[i]['id'] == id){
+        cart[i]['quantity'] = val;
         break;
       }
     }
     $("#prod_"+id).val(val);
   }
 
-  var addToOrder = function(c){
+  var addToCart = function(c){
     var quantity = checkQuantity(c);
     ////console.log(quantity)
     if(quantity == 0){
       table.append(item.compose({
+        'sku':c['sku'],
         'name':c['name'],
         'id': c['id'],
         'price':c['price']
@@ -164,12 +166,12 @@ $(function(){
         if(val != 0){
           setQuantity(c['id'],Number(val));
         }else{
-          clearorder(c['id'])
+          clearCart(c['id'])
           $('#row_'+c['id']).remove();
         }
         updatePrice();
       });
-      order.push(c);
+      cart.push(c);
       updateQuantity(c['id'],quantity)
     }else{
       updateQuantity(c['id'],quantity)
@@ -177,20 +179,20 @@ $(function(){
     updatePrice();
   }
 
-  var clearorder = function(id) {
+  var clearCart = function(id) {
     if(id){
-      for(var i = 0;i<order.length;++i){
-        if(order[i]['id'] == id){
-          order.remove(i);
+      for(var i = 0;i<cart.length;++i){
+        if(cart[i]['id'] == id){
+          cart.remove(i);
           break;
         }
       }
     }else{
       // remove everything
-      for(var i = 0;i<order.length;++i){
-        $('#row_'+order[i]['id']).remove();
+      for(var i = 0;i<cart.length;++i){
+        $('#row_'+cart[i]['id']).remove();
       }
-      order = [];
+      cart = [];
       clearTotals();
     }
   }
@@ -206,10 +208,10 @@ $(function(){
     var tax = 0;
     var items = 0;
 
-    for(var i = 0;i<order.length;++i){
-      ////console.log(order[i]['price'] +" with "+order[i]['quantity'])
-      subtotal += order[i]['price']*order[i]['quantity'];
-      items += order[i]['quantity'];
+    for(var i = 0;i<cart.length;++i){
+      ////console.log(cart[i]['price'] +" with "+cart[i]['quantity'])
+      subtotal += cart[i]['price']*cart[i]['quantity'];
+      items += cart[i]['quantity'];
         
     }
     tax = subtotal*0.13;
@@ -221,8 +223,8 @@ $(function(){
 
   var getCurrentTotal = function(){
     var subtotal = 0;
-    for(var i = 0;i<order.length;++i){
-      subtotal += order[i]['price']*order[i]['quantity'];
+    for(var i = 0;i<cart.length;++i){
+      subtotal += cart[i]['price']*cart[i]['quantity'];
     }
     return subtotal*1.13;
   }
@@ -230,7 +232,7 @@ $(function(){
     $('.product').click(function(e){
         e.preventDefault();
         var el = $(this).data();
-        addToOrder(el);
+        addToCart(el);
       });
   }
   var currPage = 0;
@@ -290,13 +292,13 @@ $(function(){
       });
       $("#btnFinalize").unbind().bind('click',function(){
         e.preventDefault();
-        ////console.log(JSON.stringify(order))
+        ////console.log(JSON.stringify(cart))
         //console.log("ajax finalize !")
-        if(order.length > 0){
+        if(cart.length > 0){
           $.ajax({
             type: 'POST',
             url: '/checkout',
-            data: JSON.stringify(order),
+            data: JSON.stringify(cart),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function(res) {
@@ -305,7 +307,7 @@ $(function(){
                 $("#c_change").text("");
                 $("#c_tender").val("");
                 $("#checkoutModal").modal('toggle');
-                clearorder();
+                clearCart();
               }
               else {
                 alert("Something terrible happened while saving");
