@@ -229,7 +229,9 @@ a {
   color: white;
 }
 
-
+.roundedBoxNoPos, .vh87, .padme, .scrollable {
+  color: white;
+}
 
 .shoppingList{
   padding: 20px;
