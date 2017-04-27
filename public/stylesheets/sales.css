@@ -50,6 +50,10 @@
   font-size: 18px;
 }
 
+.sales {
+  color: black;
+  background-color: white;
+}
 .stats__period {
   font-size: 14px;
 }
