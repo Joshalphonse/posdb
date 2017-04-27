@@ -340,7 +340,8 @@ a {
 }
 
 .users {
-  color: white;
+  border-color: white;
+  color: black;
 }
 
 .purchButton{
