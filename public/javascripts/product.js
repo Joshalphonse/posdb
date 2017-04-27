@@ -108,7 +108,8 @@ $(function(){
           $('#prod_id').val(row['id']);
           $('#p_name').val(row['name']);
           $('#p_price').val(row['price']);
-          $('#cat_name').val(row['catid'])
+          $('#cat_name').val(row['catid']);
+          $('#p_sku').val(row['sku'])
       };
     });
     $('.addProductCat').click(function() {
@@ -136,8 +137,8 @@ $(function(){
           data: {'id': $('#prod_id').val(),
                  'name': $('#p_name').val(),
                  'price': $('#p_price').val(),
-                 'category_id': $('#cat_name').val()
-               },
+                 'category_id': $('#cat_name').val(),
+                 'sku': $('#p_sku').val()},
           success: function(res) {
             //console.log(res);
             if (res['data'] == 'successful') {
@@ -145,6 +146,7 @@ $(function(){
               alert("Add was successful, you may continue.");
               $('#prod_id').val("");
               $('#p_name').val("");
+              $('#p_sku').val("");
               $('#prod_id').val("");
               $.get("/getProducts",function(data){
                 $('.pnlProd').empty();
