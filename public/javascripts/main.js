@@ -1,3 +1,4 @@
+
 $(function(){
   var catPane = $(".categoryResult");
   var prodPane = $(".productResult");
@@ -18,6 +19,7 @@ $(function(){
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
   };
+
   var tblCart = $("#tblCart").children('tbody');
   var table = tblCart.length ? tblCart : $('#tblCart');
   //appender template
@@ -25,11 +27,13 @@ $(function(){
   var item = '<tr id="row_{{id}}">'+
              '<td>{{sku}}</td>'+
              '<td ">{{name}}</td>'+
-             '<td class="col-xs-6"><input style="padding-left:0px; class="col-xs-12" type="number"'+ 
+             '<td class="col-xs-2"><input style="padding-left:0px; class="col-xs-12" type="number"'+ 
              'class="form-control" min="0" id="prod_{{id}}"/></td>'+
              '<td>{{price}}</td>'+
-            '<td class="col-xs-2"><input class="col-xs-12" type="text"></td>'
+            '<td class="col-xs-4"><input id="input_{{id}}" type="text"></td>'+
+            '<td id="instruction_{{id}}" class="col-xs-9"></td>'+
              '</tr>';
+
   var getCategoryPane = function() {
     $.get("/getCategories/2/all",function(data){
       catPane.empty();
@@ -152,6 +156,7 @@ $(function(){
     $("#prod_"+id).val(val);
   }
 
+
   var addToCart = function(c){
     var quantity = checkQuantity(c);
     ////console.log(quantity)
@@ -160,7 +165,7 @@ $(function(){
         'sku':c['sku'],
         'name':c['name'],
         'id': c['id'],
-        'price':c['price']
+        'price':c['price'],
       }));
       $("#prod_"+c['id']).bind('keyup mouseup', function(e){
         var val = $("#prod_"+c['id']).val();
@@ -172,6 +177,12 @@ $(function(){
         }
         updatePrice();
       });
+        $("#input_"+c['id']).bind('keyup', function(e){
+            
+        c['instruction'] = $("#input_"+c['id']).val();
+        console.log(JSON.stringify(c));
+      });
+        
       cart.push(c);
       updateQuantity(c['id'],quantity)
     }else{
@@ -308,6 +319,7 @@ $(function(){
                 $("#c_change").text("");
                 $("#c_tender").val("");
                 $("#checkoutModal").modal('toggle');
+                sendCartToChef();
                 clearCart();
               }
               else {
@@ -321,4 +333,17 @@ $(function(){
       });
     });
   });
+    
+   var sendCartToChef = function(){
+   
+    
+       var id = "";
+       for(var i = 0;i<cart.length;++i){
+            id += cart[i]['id'];
+            id += Math.random() *100
+            
+        }
+       localStorage.setItem('cart_' + id ,JSON.stringify(cart));
+        
+   };
 });
