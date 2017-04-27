@@ -1,0 +1,64 @@
+script(type='text/javascript' src='javascripts/main.js')
+div.row
+  div.no-gutter.col-md-4
+    div.row.roundedBox.shoppingList
+      table.table.table-hover(id='tblCart')
+        thead
+          tr
+            th SKU 
+            th Detail
+            th Quantity
+            th Price
+        tbody
+    div.row.roundedBox.priceTab
+      div.row
+        div.col-xs-8
+          div.row
+            h2 Subtotal
+          div.row
+            h4 Tax
+          div.row
+            h4 Items
+        div.col-xs-4
+          div.row
+            h2#subtotal $0.00
+          div.row
+            h4#tax $0.00
+          div.row
+            h4#items 0
+      div.row
+        button.btn.btn-success.purchButton#btnPurchase(data-target='#checkoutModal', data-toggle='modal',
+          data-direction="bottom") PURCHASE
+          span(class='glyphicon glyphicon glyphicon-shopping-cart', style='padding-left:15px') 
+  div.col-md-8
+    div.row
+      div.searchDiv
+        input.search#search_me(type="search",placeholder="Search for any product name or SKU number")
+    div.categoryResult
+
+    div.productResult
+div.checkout-modal
+  div(id='checkoutModal', class='modal fade', role='dialog', aria-hidden='true',
+  aria-labelledby="checkoutModalLabel")
+    div(class='modal-dialog')
+      div(class='modal-content')
+        form(name="checkout", method="post",id="checkout_form")
+          div(class='modal-header')
+            button(type='button', class='btn btn-primary float-right', 
+              data-dismiss="modal") Close
+              span(class='glyphicon glyphicon-floppy-save', style='padding-left:15px') 
+            h4.float-left Checkout
+            div.clear
+          div(class='modal-body')
+            div(class='form-group')
+              label Total
+              h1#the_total(style="text-align:center;font-size:900%;") 
+            div(class='form-group')
+              label(for='c_tender',class='control-label') Tender
+              input(type="text",class="form-control",id='c_tender')
+            div(class='form-group')
+              label Change
+              h1#c_change(style="text-align:center;font-size:450%;")
+        div(class='modal-footer')
+          button(type='submit', class='btn btn-success purchButton', disabled, 
+            id='btnFinalize') FINALIZE SALE

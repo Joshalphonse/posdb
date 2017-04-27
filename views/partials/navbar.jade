@@ -1,0 +1,22 @@
+nav.navbar.navbar-fixed-top.navbar-inverse
+  div.container-fluid
+    div.navbar-header
+      a.navbar-brand(href='#',class='goHome') POSDB
+    div#navbar.navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li
+          a(href='#',class='goHome') Home
+        li
+          a(href='#',class='goProduct') Product
+      p.navbar-text.navbar-right 
+        | Signed in as 
+        a#goUserInfo(href='#') #{user}
+      ul.nav.navbar-nav.navbar-right
+        - if(privledge == "Admin" || privledge == "Manager")
+          li
+            a(href='#',class='goUsers') Manage Users
+        - if(privledge == "Admin" || privledge == "Manager" || privledge == "Accountant" )
+          li
+            a(href='#',class='goSales') Sales
+        li 
+          a(href='/login') Logout
