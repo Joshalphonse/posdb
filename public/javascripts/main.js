@@ -24,11 +24,11 @@ $(function(){
   var numCategory = 1;
   var item = '<tr id="row_{{id}}">'+
              '<td>{{sku}}</td>'+
-             '<td>{{name}}</td>'+
-             '<td class="col-xs-3"><input type="number"'+ 
+             '<td ">{{name}}</td>'+
+             '<td class="col-xs-6"><input style="padding-left:0px; class="col-xs-12" type="number"'+ 
              'class="form-control" min="0" id="prod_{{id}}"/></td>'+
              '<td>{{price}}</td>'+
-            '<td class="col-xs-5"><input class="col-xs-12" type="text"></td>'
+            '<td class="col-xs-2"><input class="col-xs-12" type="text"></td>'
              '</tr>';
   var getCategoryPane = function() {
     $.get("/getCategories/2/all",function(data){
