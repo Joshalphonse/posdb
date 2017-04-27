@@ -28,6 +28,7 @@ $(function(){
              '<td class="col-xs-3"><input type="number"'+ 
              'class="form-control" min="0" id="prod_{{id}}"/></td>'+
              '<td>{{price}}</td>'+
+            '<td class="col-xs-5"><input class="col-xs-12" type="text"></td>'
              '</tr>';
   var getCategoryPane = function() {
     $.get("/getCategories/2/all",function(data){
