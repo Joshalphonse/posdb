@@ -39,7 +39,14 @@ router.get('/goproduct', function(req, res, next) {
     res.render('login', { user: username });
   }
 });
-
+router.get('/gochef', function(req, res, next) {
+  var username = req.session.username;
+  if(username){
+    res.render('partials/chef');
+  }else{
+    res.render('login', { user: username });
+  }
+});
 router.get('/gousers', function(req, res, next) {
   var username = req.session.username;
   if(username){
@@ -78,7 +85,7 @@ router.get('/getProducts/:option?/:page?/:bar?/:criteria?/:force?',function(req,
   var query;
   if(username){ //&& (priv == "Admin" || priv == "Manager")
     db.serialize(function(){
-      query = "SELECT PRODUCT_ID,CALORIES, PRODUCT_NAME, CATEGORY_NAME, PRICE,"
+      query = "SELECT PRODUCT_ID,PRODUCT_BARCODE_SKU, PRODUCT_NAME, CATEGORY_NAME, PRICE,"
       + " P.CATEGORY_ID FROM PRODUCT P JOIN CATEGORY C ON"
       + " P.CATEGORY_ID=C.CATEGORY_ID WHERE";
       var param = {};
@@ -102,7 +109,7 @@ router.get('/getProducts/:option?/:page?/:bar?/:criteria?/:force?',function(req,
           var sku = filter.match(/\d+/);
           if(sku){
             filter = sku[0];
-            query += " CALORIES LIKE ? AND";
+            query += " PRODUCT_BARCODE_SKU LIKE ? AND";
                 
           }else{
             filter = filter.split("-")[1];
@@ -253,7 +260,7 @@ router.get('/getSalesDetails/:id',function(req,res,next){
   var query;
   if(username && priv == "Admin" || priv == "Manager" || priv == "Accountant"){
     db.serialize(function(){
-      query = "SELECT PRODUCT_NAME,CALORIES,CATEGORY_NAME,"
+      query = "SELECT PRODUCT_NAME,PRODUCT_BARCODE_SKU,CATEGORY_NAME,"
         + "FINAL_PRICE,QUANTITY_BOUGHT FROM SALE_DETAILS S JOIN PRODUCT P ON "
         + "S.PRODUCT_ID=P.PRODUCT_ID JOIN CATEGORY C ON C.CATEGORY_ID=P.CATEGORY_ID "
         + "WHERE SALE_TRANSACTION_ID=$id ORDER BY QUANTITY_BOUGHT DESC";
@@ -299,12 +306,12 @@ router.post('/update',function(req,res,next){
   if(username && (priv == "Admin" || priv == "Manager")){
     db.serialize(function(){
       if(data.id == ""){
-        var stmt = db.prepare("INSERT INTO PRODUCT (CALORIES, "+
+        var stmt = db.prepare("INSERT INTO PRODUCT (PRODUCT_BARCODE_SKU, "+
         "CATEGORY_ID,PRODUCT_NAME,PRICE) VALUES ($sku,$cat,$name,$price)");
         var param = {$sku:data.sku,$cat:data.category_id,$name:data.name,
                      $price:data.price*100};
       }else{
-        var stmt = db.prepare("UPDATE PRODUCT SET CALORIES=$sku, "+
+        var stmt = db.prepare("UPDATE PRODUCT SET PRODUCT_BARCODE_SKU=$sku, "+
         "CATEGORY_ID=$cat,PRODUCT_NAME=$name,PRICE=$price WHERE PRODUCT_ID=$id");
         var param = {$sku:data.sku,$cat:data.category_id,$name:data.name,
                      $price:data.price*100,$id:data.id};
