@@ -1,8 +1,3 @@
-
-
-
-
-
 #### Dependencies:
 Make sure you have NodeJS installed
 
