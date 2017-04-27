@@ -85,7 +85,7 @@ router.get('/getProducts/:option?/:page?/:bar?/:criteria?/:force?',function(req,
   var query;
   if(username){ //&& (priv == "Admin" || priv == "Manager")
     db.serialize(function(){
-      query = "SELECT PRODUCT_ID,PRODUCT_BARCODE_SKU, PRODUCT_NAME, CATEGORY_NAME, PRICE,"
+      query = "SELECT PRODUCT_ID, PRODUCT_NAME, CATEGORY_NAME, PRICE,"
       + " P.CATEGORY_ID FROM PRODUCT P JOIN CATEGORY C ON"
       + " P.CATEGORY_ID=C.CATEGORY_ID WHERE";
       var param = {};
