@@ -252,7 +252,7 @@ router.get('/getSalesDetails/:id',function(req,res,next){
   var query;
   if(username && priv == "Admin" || priv == "Manager" || priv == "Accountant"){
     db.serialize(function(){
-      query = "SELECT PRODUCT_NAME,PRODUCT_BARCODE_SKU,CATEGORY_NAME,"
+      query = "SELECT PRODUCT_NAME, CATEGORY_NAME,"
         + "FINAL_PRICE,QUANTITY_BOUGHT FROM SALE_DETAILS S JOIN PRODUCT P ON "
         + "S.PRODUCT_ID=P.PRODUCT_ID JOIN CATEGORY C ON C.CATEGORY_ID=P.CATEGORY_ID "
         + "WHERE SALE_TRANSACTION_ID=$id ORDER BY QUANTITY_BOUGHT DESC";
@@ -293,19 +293,19 @@ router.get('/getSalesDetails/:id',function(req,res,next){
 router.post('/update',function(req,res,next){
   var username = req.session.username;
   var priv = req.session.privledge;
-  var data = req.body; //id, name,price,category_id,sku
+  var data = req.body; //id, name,price,category_id
   ////console.log(data);
   if(username && (priv == "Admin" || priv == "Manager")){
     db.serialize(function(){
       if(data.id == ""){
-        var stmt = db.prepare("INSERT INTO PRODUCT (PRODUCT_BARCODE_SKU, "+
-        "CATEGORY_ID,PRODUCT_NAME,PRICE) VALUES ($sku,$cat,$name,$price)");
-        var param = {$sku:data.sku,$cat:data.category_id,$name:data.name,
+        var stmt = db.prepare("INSERT INTO PRODUCT ("+
+        "CATEGORY_ID,PRODUCT_NAME,PRICE) VALUES ($cat,$name,$price)");
+        var param = {$cat:data.category_id,$name:data.name,
                      $price:data.price*100};
       }else{
-        var stmt = db.prepare("UPDATE PRODUCT SET PRODUCT_BARCODE_SKU=$sku, "+
+        var stmt = db.prepare("UPDATE PRODUCT SET, "+
         "CATEGORY_ID=$cat,PRODUCT_NAME=$name,PRICE=$price WHERE PRODUCT_ID=$id");
-        var param = {$sku:data.sku,$cat:data.category_id,$name:data.name,
+        var param = {,$cat:data.category_id,$name:data.name,
                      $price:data.price*100,$id:data.id};
       }
 
@@ -493,7 +493,7 @@ router.post('/update_cat',function(req,res,next){
         "CATEGORY_NAME) VALUES ($parent,$name)");
         var param = {$parent:data.parent,$name:data.name};
       }else{
-        var stmt = db.prepare("UPDATE CATEGORY SET PARENT_CATEGORY_ID=$sku, "+
+        var stmt = db.prepare("UPDATE CATEGORY SET PARENT_CATEGORY_ID, "+
         "CATEGORY_NAME=$cat WHERE CATEGORY_ID=$id");
         var param = {$parent:data.parent,$name:data.name,$id:data.id};
       }
