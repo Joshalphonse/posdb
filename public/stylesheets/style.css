@@ -228,10 +228,14 @@ a {
 .row{
   color: white;
 }
+
+
+
 .shoppingList{
   padding: 20px;
   height: 60vh;
   overflow: auto;
+  color: black;
 }
 
 .priceTab{
