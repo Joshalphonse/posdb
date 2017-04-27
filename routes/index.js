@@ -106,15 +106,7 @@ router.get('/getProducts/:option?/:page?/:bar?/:criteria?/:force?',function(req,
         }else{
           //matching name query
 
-          var sku = filter.match(/\d+/);
-          if(sku){
-            filter = sku[0];
-            query += " PRODUCT_BARCODE_SKU LIKE ? AND";
-                
-          }else{
-            filter = filter.split("-")[1];
-            query += " PRODUCT_NAME LIKE ? AND";
-          }
+          
           var param = "%"+filter+"%"; 
         }
       }
