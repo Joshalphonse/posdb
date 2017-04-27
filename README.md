@@ -1,7 +1,7 @@
 
 
 
-## ~ Getting it up ~
+
 
 #### Dependencies:
 Internet connection 
