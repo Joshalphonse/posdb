@@ -23,7 +23,7 @@ $(function(){
   //appender template
   var numCategory = 1;
   var item = '<tr id="row_{{id}}">'+
-             '<td>{{calories}}</td>'+
+             '<td>{{sku}}</td>'+
              '<td>{{name}}</td>'+
              '<td class="col-xs-3"><input type="number"'+ 
              'class="form-control" min="0" id="prod_{{id}}"/></td>'+
