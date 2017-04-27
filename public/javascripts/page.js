@@ -16,6 +16,9 @@ $(function(){
   $(".goProduct").click(function(){
     getProductLayout();
   });
+    $(".goChef").click(function(){
+       getChefLayout(); 
+    });
   $(".goUsers").click(function(){
     getUsersLayout();
   });
@@ -49,6 +52,14 @@ $(function(){
     });
   }
 
+   var getChefLayout = function() {
+    mainContainer.empty();
+    loadingSpinner();
+    $.get("/gochef",function(data){
+      mainContainer.empty();
+      mainContainer.append(data);
+    });
+  }
   var getSalesLayout = function() {
     mainContainer.empty();
     loadingSpinner();

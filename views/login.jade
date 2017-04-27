@@ -3,7 +3,7 @@ extends layout
 block content
   link(rel='stylesheet', href='/stylesheets/login.css')
   div.login
-    div.title Login to your account
+    div.title Login
     form(action='/signin',method='post')
       div.input
         -if(error)

@@ -9,7 +9,7 @@ div.row
       
       
       div
-        button.products.addProductBtn.btn.btn-success.float-right(data-target='#updateModal', data-toggle='modal',
+        button.addProductBtn.btn.btn-success.float-right(data-target='#updateModal', data-toggle='modal',
           data-direction="bottom") Add Product
         button.addProductCat.btn.btn-success.float-right(data-target='#updateCategory',style='margin-right:10px;', 
           data-toggle='modal', data-direction="bottom") Add Category
@@ -35,11 +35,6 @@ div.product-modal
             h4.float-left Manage Products
             div.clear
           div(class='modal-body')
-            div(class='form-group')
-              label(for='p_sku',class='control-label') SKU (9 digit number)
-              input(type="text",class="form-control",data-error="Max length is 44, please fill in this field",
-                id='p_sku', maxlength='44',required)
-              //- span.help-block.with-errors Max 44 characters numbers and underscores 
             div(class='form-group')
               label(for='cat_name',class='control-label') Category
               select.form-control.selectpicker(name="cat_name", id='cat_name',placeholder='Select a category', required)
