@@ -225,7 +225,9 @@ a {
   overflow-x:hidden;
 }
 
-
+.row{
+  color: white;
+}
 .shoppingList{
   padding: 20px;
   height: 60vh;
