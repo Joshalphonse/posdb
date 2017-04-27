@@ -180,7 +180,7 @@ $(function(){
         $("#input_"+c['id']).bind('keyup', function(e){
             
         c['instruction'] = $("#input_"+c['id']).val();
-        console.log(JSON.stringify(c));
+        //console.log(JSON.stringify(c));
       });
         
       cart.push(c);
