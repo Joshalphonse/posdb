@@ -305,7 +305,7 @@ router.post('/update',function(req,res,next){
       }else{
         var stmt = db.prepare("UPDATE PRODUCT SET, "+
         "CATEGORY_ID=$cat,PRODUCT_NAME=$name,PRICE=$price WHERE PRODUCT_ID=$id");
-        var param = {,$cat:data.category_id,$name:data.name,
+        var param = {$cat:data.category_id,$name:data.name,
                      $price:data.price*100,$id:data.id};
       }
 
