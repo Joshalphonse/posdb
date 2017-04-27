@@ -1,18 +1,16 @@
-# POSDB
 
 
-## ~ Getting it up ~
 
-Go ahead and download this project [here]
+
 
 #### Dependencies:
-Internet connection 
-Node.js 0.10.x
+Make sure you have NodeJS installed
+
 
 Run the following commands:
 
 Extract the zip file with project in it or git clone this repository, open up a terminal or powershell
-`cd posdb`
+`cd posdb(or wherever your directory is located)`
 `npm install`
 
 *If anything goes wrong* here are some additional command you can use with out harm:
@@ -29,3 +27,6 @@ To start:
 `npm start`
 
 Now browse to *localhost:3000* to play with the app
+
+If there is any issues when starting, try to npm install <missing dependency>
+
