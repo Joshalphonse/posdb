@@ -229,7 +229,7 @@ a {
   color: white;
 }
 
-.products {
+.roundedBoxNoPos, .vh87, .padme, .scrollable {
   color: white;
 }
 
@@ -337,11 +337,6 @@ a {
 #updateCategory{
   overflow: hidden;
   top:50%;
-}
-
-.users {
-  border-color: white;
-  color: black;
 }
 
 .purchButton{
