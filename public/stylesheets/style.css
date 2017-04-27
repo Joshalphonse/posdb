@@ -339,6 +339,10 @@ a {
   top:50%;
 }
 
+.users {
+  color: white;
+}
+
 .purchButton{
   width:100%;
   height:100%;
