@@ -5,7 +5,7 @@ body {
   padding: 50px;
   /*font: 15px 'Merriweather Sans', 'lucida sans', sans-serif;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: radial-gradient(transparent 50%,rgba(0,0,0,.3) 100%),linear-gradient(#D77A6B,#d2c09c 60%,#876d54);
+  background: black;
   
 }
 
@@ -38,7 +38,6 @@ a {
   border: 2px solid rgba(0, 0, 0, .4);
   border-top-color: transparent;
   border-left-color: transparent;
-  border-radius: 150px;
   display: inline-block;
   width: 12px;
   height: 12px;
@@ -97,9 +96,7 @@ a {
     -moz-appearance: none;
     padding: 12px 48px 12px 12px;
   
-    -webkit-border-radius: 200px;
-    -moz-border-radius: 200px;
-    border-radius: 200px;
+
   
   width: 100%;
   height: 16px;
@@ -147,9 +144,6 @@ a {
   padding: 5px;
   width: 290px;
 
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
 
   margin: 24px auto;
   color: #fff;
@@ -199,38 +193,33 @@ a {
     background: -ms-linear-gradient(#45a2c4, #1a729f, #14608d 90%);
     background: -o-linear-gradient(#45a2c4, #1a729f, #14608d 90%);
     background: linear-gradient(#45a2c4, #1a729f, #14608d 90%);
-  
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+
   
     -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.2);  
     -moz-box-shadow: 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.2);  
     box-shadow: 0 0 0 1px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.2);  
 }
 
-.roundedBox{
+.box{
   /*margin:30px auto;*/
   width: 100%;
   height: 100%;
   background: #fff;
   padding: 0 30px;
   box-sizing: border-box;
-  border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
   position: relative;
   overflow: auto;
   overflow-x:hidden;
 }
 
-.roundedBoxNoPos{
+.boxNoPos{
   /*margin:30px auto;*/
   width: 100%;
   height: 100%;
   background: #fff;
   padding: 0 30px;
   box-sizing: border-box;
-  border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
   overflow: auto;
   overflow-x:hidden;

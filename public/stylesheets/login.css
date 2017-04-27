@@ -9,7 +9,7 @@ html{
 }
 body{
   &:extend(html);
-  background: radial-gradient(transparent 50%,rgba(0,0,0,.3) 100%),linear-gradient(#D77A6B,#d2c09c 60%,#876d54);
+  background: black;
   font:16px 'Hevetica', sans-serif;
   color: #8e8171;
 }
