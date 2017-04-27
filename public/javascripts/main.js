@@ -25,7 +25,6 @@ $(function(){
   //appender template
   var numCategory = 1;
   var item = '<tr id="row_{{id}}">'+
-             '<td>{{sku}}</td>'+
              '<td ">{{name}}</td>'+
              '<td class="col-xs-2"><input style="padding-left:0px; class="col-xs-12" type="number"'+ 
              'class="form-control" min="0" id="prod_{{id}}"/></td>'+
@@ -162,7 +161,6 @@ $(function(){
     ////console.log(quantity)
     if(quantity == 0){
       table.append(item.compose({
-        'sku':c['sku'],
         'name':c['name'],
         'id': c['id'],
         'price':c['price'],
